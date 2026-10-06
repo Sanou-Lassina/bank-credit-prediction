@@ -1,0 +1,134 @@
+/* ===================== Base ===================== */
+.block-container { padding-top: 1.6rem; max-width: 1400px; }
+header[data-testid="stHeader"] { background: transparent; }
+footer { visibility: hidden; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes flow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45); }
+    50%      { box-shadow: 0 0 0 9px rgba(59, 130, 246, 0); }
+}
+
+/* ===================== Bandeau d'en-tête ===================== */
+.app-header {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    padding: 28px 34px;
+    margin-bottom: 18px;
+    background: linear-gradient(120deg, #0B2545, #13315C, #1D4ED8, #13315C, #0B2545);
+    background-size: 300% 300%;
+    animation: flow 16s ease infinite, fadeUp 0.7s ease both;
+    box-shadow: 0 10px 30px rgba(11, 37, 69, 0.25);
+}
+.app-header::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 70%);
+    pointer-events: none;
+}
+.app-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #93C5FD !important;
+    margin-bottom: 6px;
+}
+.app-title { font-size: 2.1rem; font-weight: 800; line-height: 1.15; color: #FFFFFF !important; }
+.app-title span { font-weight: 400; opacity: 0.9; }
+.app-accent {
+    height: 3px;
+    width: 96px;
+    border-radius: 3px;
+    margin: 12px 0 14px 0;
+    background: linear-gradient(90deg, #38BDF8, #FFFFFF, #38BDF8);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+.app-header p { margin: 0; max-width: 1000px; color: #DBEAFE !important; line-height: 1.65; font-size: 0.98rem; }
+.app-header strong { color: #FFFFFF !important; }
+
+/* ===================== Cartes et graphiques ===================== */
+div[data-testid="stMetric"] {
+    background: var(--secondary-background-color, #FFFFFF);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-left: 4px solid #1D4ED8;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    animation: fadeUp 0.6s ease both;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(29, 78, 216, 0.15);
+}
+div[data-testid="stMetric"] [data-testid="stMetricValue"] { color: #0B2545; font-weight: 800; }
+
+div[data-testid="stPlotlyChart"] {
+    background: var(--secondary-background-color, #FFFFFF);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    animation: fadeUp 0.7s ease both;
+}
+div[data-testid="stAlert"] { border-radius: 10px; animation: fadeUp 0.5s ease both; }
+div[data-testid="stExpander"] {
+    border-radius: 12px;
+    background: var(--secondary-background-color, #FFFFFF);
+    animation: fadeUp 0.6s ease both;
+}
+div[data-testid="stDataFrame"] { animation: fadeUp 0.6s ease both; }
+
+/* ===================== Navigation ===================== */
+div[data-testid="stButtonGroup"] { animation: fadeUp 0.6s ease both; margin-bottom: 0.5rem; }
+div[data-testid="stButtonGroup"] button { font-weight: 600; padding: 0.5rem 1.1rem; transition: all 0.2s ease; }
+
+/* ===================== Boutons ===================== */
+.stButton > button,
+.stDownloadButton > button,
+div[data-testid="stFormSubmitButton"] > button {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+div[data-testid="stFormSubmitButton"] > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.28);
+}
+div[data-testid="stFormSubmitButton"] > button { animation: pulse 2.6s ease-in-out infinite; }
+
+/* ===================== Barre latérale ===================== */
+section[data-testid="stSidebar"] [data-testid="stForm"] {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ===================== Pied de page ===================== */
+.footer { text-align: center; opacity: 0.65; font-size: 0.8rem; }
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}

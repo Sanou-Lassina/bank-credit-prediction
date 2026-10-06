@@ -1,0 +1,12 @@
+[theme]
+primaryColor = "#1D4ED8"                 # Bleu royal (boutons, accents)
+backgroundColor = "#F1F5F9"              # Gris ardoise très clair (fond)
+secondaryBackgroundColor = "#FFFFFF"     # Blanc (cartes, conteneurs)
+textColor = "#0F172A"                    # Anthracite
+font = "sans serif"
+
+[theme.sidebar]
+backgroundColor = "#0B2545"              # Bleu nuit
+secondaryBackgroundColor = "#13315C"     # Champs de saisie
+textColor = "#E2E8F0"
+primaryColor = "#3B82F6"
