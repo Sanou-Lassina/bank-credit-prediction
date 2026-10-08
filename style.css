@@ -16,6 +16,10 @@ footer { visibility: hidden; }
     0%   { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
+@keyframes popIn {
+    from { transform: scale(0.94); opacity: 0.6; }
+    to   { transform: none; opacity: 1; }
+}
 @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45); }
     50%      { box-shadow: 0 0 0 9px rgba(59, 130, 246, 0); }
@@ -99,9 +103,79 @@ div[data-testid="stExpander"] {
 }
 div[data-testid="stDataFrame"] { animation: fadeUp 0.6s ease both; }
 
-/* ===================== Navigation ===================== */
-div[data-testid="stButtonGroup"] { animation: fadeUp 0.6s ease both; margin-bottom: 0.5rem; }
-div[data-testid="stButtonGroup"] button { font-weight: 600; padding: 0.5rem 1.1rem; transition: all 0.2s ease; }
+/* ===================== Navigation principale ===================== */
+div[data-testid="stRadio"] { width: 100%; margin-bottom: 1rem; animation: fadeUp 0.6s ease both; }
+div[data-testid="stRadio"] div[role="radiogroup"] {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 6px;
+    padding: 6px;
+    overflow-x: auto;
+    background: var(--secondary-background-color, #FFFFFF);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+}
+/* Chaque onglet */
+div[data-testid="stRadio"] div[role="radiogroup"] > label {
+    flex: 1 1 0;
+    min-width: max-content;
+    margin: 0;
+    padding: 0.75rem 1.1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+/* Masque la pastille ronde du bouton radio */
+div[data-testid="stRadio"] div[role="radiogroup"] > label > div:first-child { display: none !important; }
+div[data-testid="stRadio"] div[role="radiogroup"] > label p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    color: #475569;
+    transition: color 0.25s ease;
+}
+/* Survol */
+div[data-testid="stRadio"] div[role="radiogroup"] > label:hover {
+    background: rgba(29, 78, 216, 0.09);
+    transform: translateY(-1px);
+}
+div[data-testid="stRadio"] div[role="radiogroup"] > label:hover p { color: #0B2545; }
+/* Onglet ACTIF : fond bleu nuit dégradé, texte blanc, liseré cyan */
+div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
+    background: linear-gradient(135deg, #0B2545 0%, #1D4ED8 100%);
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.38), inset 0 -3px 0 #38BDF8;
+    animation: popIn 0.35s ease both;
+}
+div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) p { color: #FFFFFF !important; }
+
+/* ===================== Navigation secondaire (analyse), version compacte ===================== */
+.st-key-nav_analyse div[data-testid="stRadio"] { margin-bottom: 0.7rem; }
+.st-key-nav_analyse div[data-testid="stRadio"] div[role="radiogroup"] {
+    padding: 4px;
+    gap: 4px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+}
+.st-key-nav_analyse div[data-testid="stRadio"] div[role="radiogroup"] > label {
+    padding: 0.42rem 0.85rem;
+    border-radius: 9px;
+}
+.st-key-nav_analyse div[data-testid="stRadio"] div[role="radiogroup"] > label > div:first-child {
+    transform: scale(0.82);
+}
+.st-key-nav_analyse div[data-testid="stRadio"] div[role="radiogroup"] > label p {
+    font-size: 0.84rem;
+}
+.st-key-nav_analyse div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input:checked) {
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.32), inset 0 -2px 0 #38BDF8;
+}
 
 /* ===================== Boutons ===================== */
 .stButton > button,

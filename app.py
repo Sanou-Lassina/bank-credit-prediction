@@ -11,6 +11,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+import analyse_marketing
+
 try:
     import shap
 
@@ -22,6 +24,10 @@ except ImportError:
 # CONSTANTES
 # ============================================================
 BASE_DIR = Path(__file__).parent
+# Fichier chargé directement depuis ce chemin ; repli sur le dossier de l'application
+FICHIER_ANALYSE = Path("D:/Projets/Projet_Bank_Taux_de_reconvertion/bank.xlsx")
+if not FICHIER_ANALYSE.exists():
+    FICHIER_ANALYSE = BASE_DIR / "bank.xlsx"
 DEVISE = "€"  # À aligner avec l'unité des données d'entraînement
 EDUCATION = ["Licence", "Master", "Formation professionnelle", "Autre"]
 
@@ -181,7 +187,8 @@ def bar_chart(df: pd.DataFrame, x: str, y: str, colors, title: str) -> go.Figure
 # ============================================================
 # BARRE LATÉRALE : paramètres + formulaire
 # ============================================================
-PAGES = ["🎯 Prédiction individuelle", "📦 Prédiction en lot", "📈 Performance du modèle", "ℹ️ À propos"]
+PAGES = ["🎯 Prédiction individuelle", "📦 Prédiction en lot", "📈 Performance du modèle", "ℹ️ À propos",
+         "📊 Analyse marketing des données"]
 
 st.session_state.setdefault("page", PAGES[0])
 st.session_state.setdefault("resultat", None)
@@ -261,8 +268,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-choix = st.segmented_control("Navigation", PAGES, key="page", label_visibility="collapsed")
-page = choix or PAGES[0]
+page = st.radio("Navigation", PAGES, key="page", horizontal=True, label_visibility="collapsed")
 
 # ------------------------------------------------------------
 # Onglet 1 : prédiction individuelle
@@ -472,6 +478,12 @@ Les segments marketing (très forte, forte, moyenne, faible) en découlent.
 - Le score est une aide à la décision commerciale ; il ne doit pas fonder seul une décision de crédit.
 - Les montants sont exprimés en {DEVISE} : ils doivent correspondre à l'unité des données d'entraînement.
 """)
+
+# ------------------------------------------------------------
+# Onglet 5 : analyse marketing des données
+# ------------------------------------------------------------
+if page == PAGES[4]:
+    analyse_marketing.afficher(FICHIER_ANALYSE)
 
 # ============================================================
 # PIED DE PAGE
