@@ -1,6 +1,7 @@
 """Thera Bank - Moteur de décision IA (Streamlit)."""
 from __future__ import annotations
 
+import importlib
 import json
 from datetime import datetime
 from pathlib import Path
@@ -12,6 +13,8 @@ import plotly.graph_objects as go
 import streamlit as st
 
 import analyse_marketing
+
+importlib.reload(analyse_marketing)  # toujours utiliser la dernière version du module d'analyse
 
 try:
     import shap
@@ -25,9 +28,9 @@ except ImportError:
 # ============================================================
 BASE_DIR = Path(__file__).parent
 # Fichier chargé directement depuis ce chemin ; repli sur le dossier de l'application
-FICHIER_ANALYSE = Path("D:/Projets/Projet_Bank_Taux_de_reconvertion/bank.xlsx")
+FICHIER_ANALYSE = Path("D:/Projets/Projet_Bank_Taux_de_reconvertion/thera_bank.xlsx")
 if not FICHIER_ANALYSE.exists():
-    FICHIER_ANALYSE = BASE_DIR / "bank.xlsx"
+    FICHIER_ANALYSE = BASE_DIR / "thera_bank.xlsx"
 DEVISE = "€"  # À aligner avec l'unité des données d'entraînement
 EDUCATION = ["Licence", "Master", "Formation professionnelle", "Autre"]
 
@@ -188,7 +191,7 @@ def bar_chart(df: pd.DataFrame, x: str, y: str, colors, title: str) -> go.Figure
 # BARRE LATÉRALE : paramètres + formulaire
 # ============================================================
 PAGES = ["🎯 Prédiction individuelle", "📦 Prédiction en lot", "📈 Performance du modèle", "ℹ️ À propos",
-         "📊 Analyse marketing des données"]
+         "📊 Analyse marketing"]
 
 st.session_state.setdefault("page", PAGES[0])
 st.session_state.setdefault("resultat", None)
@@ -263,6 +266,7 @@ st.markdown(
 <div class="app-title">🏦 Thera Bank <span>· Moteur de décision IA</span></div>
 <div class="app-accent"></div>
 <p>Cette plateforme a pour objectif d'aider <strong>Thera Bank</strong> à identifier les clients les plus susceptibles d'accepter une offre de prêt personnel. À partir du profil d'un client (âge, revenu, situation familiale, produits bancaires détenus…), un modèle de machine learning estime sa probabilité d'acceptation et recommande l'action commerciale la plus adaptée. Elle permet ainsi aux équipes marketing de <strong>cibler les bons clients, de réduire le coût des campagnes et d'améliorer le taux de conversion</strong>, tout en expliquant chaque score pour faciliter la prise de décision. Les clients peuvent être évalués un par un ou en lot, à partir d'un fichier CSV.</p>
+<div class="app-author">✍️ Réalisé par <strong>Lassina SANOU -- Data Analyst | Data Scientist | Python • SQL • R • Power BI • Machine Learning</strong><span class="sep">·</span>Pour me contacter, <a href="https://sanou-lassina.github.io/Ma_Page/" target="_blank" rel="noopener noreferrer">cliquez ici ↗</a></div>
 </div>
 """,
     unsafe_allow_html=True,

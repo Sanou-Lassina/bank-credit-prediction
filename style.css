@@ -70,6 +70,35 @@ footer { visibility: hidden; }
 .app-header p { margin: 0; max-width: 1000px; color: #DBEAFE !important; line-height: 1.65; font-size: 0.98rem; }
 .app-header strong { color: #FFFFFF !important; }
 
+.app-author {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.88rem;
+    color: #BFDBFE !important;
+}
+.app-author strong { color: #FFFFFF !important; }
+.app-author .sep { opacity: 0.6; }
+.app-author a {
+    display: inline-block;
+    padding: 2px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.app-author a:hover {
+    background: #FFFFFF;
+    color: #0B2545 !important;
+    transform: translateY(-1px);
+}
+
 /* ===================== Cartes et graphiques ===================== */
 div[data-testid="stMetric"] {
     background: var(--secondary-background-color, #FFFFFF);
